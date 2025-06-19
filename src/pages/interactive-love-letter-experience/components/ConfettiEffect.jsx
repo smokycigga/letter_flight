@@ -7,7 +7,7 @@ const ConfettiEffect = () => {
     id: i,
     icon: ['Heart', 'Star', 'Sparkles'][i % 3],
     color: ['var(--color-error)', 'var(--color-warning)', 'var(--color-accent)'][i % 3],
-    initialX: Math.random() * window.innerWidth,
+    initialX: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 800,
     initialY: -50,
     size: Math.random() * 16 + 12
   }));
@@ -26,7 +26,7 @@ const ConfettiEffect = () => {
             scale: 1
           }}
           animate={{
-            y: window.innerHeight + 100,
+            y: typeof window !== 'undefined' ? window.innerHeight + 100 : 800,
             rotate: [0, 180, 360, 540, 720],
             x: piece.initialX + (Math.random() - 0.5) * 200,
             opacity: [1, 1, 0.8, 0.5, 0],
@@ -71,15 +71,15 @@ const ConfettiEffect = () => {
           key={`sketch-${i}`}
           className="absolute"
           initial={{
-            x: Math.random() * window.innerWidth,
+            x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 800,
             y: -30,
             rotate: 0,
             opacity: 0.8
           }}
           animate={{
-            y: window.innerHeight + 50,
+            y: typeof window !== 'undefined' ? window.innerHeight + 50 : 800,
             rotate: Math.random() * 720,
-            x: Math.random() * window.innerWidth,
+            x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 800,
             opacity: [0.8, 0.6, 0.4, 0]
           }}
           transition={{

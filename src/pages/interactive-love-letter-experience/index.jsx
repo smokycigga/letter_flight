@@ -13,7 +13,6 @@ const InteractiveLoveLetterExperience = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [userResponse, setUserResponse] = useState(null);
   const containerRef = useRef(null);
-  const audioRef = useRef(null);
 
   const loveMessage = `My Dearest Love,
 
@@ -28,49 +27,11 @@ Would you like to explore this beautiful journey together?
 Forever yours,
 With all my love ❤️`;
 
-  // Background music management
-  useEffect(() => {
-    // Create audio element for background music - using a working piano track
-    const audio = new Audio('https://www.bensound.com/bensound-music/bensound-tenderness.mp3');
-    audio.loop = true;
-    audio.volume = 0.4;
-    audioRef.current = audio;
-
-    // Start playing music when component mounts
-    const playMusic = () => {
-      audio.play().catch(error => {
-        console.log('Audio autoplay was prevented:', error);
-        // Try alternative approach for better browser compatibility
-        document.addEventListener('click', () => {
-          audio.play().catch(err => console.log('Could not play audio:', err));
-        }, { once: true });
-      });
-    };
-
-    // Try to play immediately, or wait for user interaction
-    playMusic();
-
-    // Cleanup function
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
-
   const handleEnvelopeClick = () => {
-    // Ensure music is playing when user interacts
-    if (audioRef.current && audioRef.current.paused) {
-      audioRef.current.play().catch(error => {
-        console.log('Could not play audio:', error);
-      });
-    }
-    
     setCurrentStage('rocket');
     setTimeout(() => {
       setCurrentStage('letter');
-    }, 2000); // Reduced duration for simpler animation
+    }, 2000);
   };
 
   const handleResponse = (response) => {
@@ -118,7 +79,7 @@ With all my love ❤️`;
           <Icon name="Sparkles" size={80} color="var(--color-accent)" />
         </div>
         <div className="absolute bottom-1/4 left-1/3">
-          <Icon name="Flower" size={100} color="var(--color-secondary)" />
+          <Icon name="Star" size={100} color="var(--color-secondary)" />
         </div>
       </div>
 
